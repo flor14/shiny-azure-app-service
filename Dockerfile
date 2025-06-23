@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean
     
 ENV RENV_VERSION=v1.0.2
+RUN R -e "install.packages('remotes')"
 RUN R -e "remotes::install_github('rstudio/renv@${RENV_VERSION}')"
 RUN R -e "options(renv.config.repos.override = 'https://packagemanager.posit.co/cran/latest')"
 
