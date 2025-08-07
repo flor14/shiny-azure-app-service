@@ -1,4 +1,4 @@
-FROM rocker/r-ver:4.2.0
+FROM rocker/r-ver:4.4.0
 
 # Install system dependencies needed for compiling packages like httpuv
 RUN apt-get update && apt-get install -y \
@@ -23,4 +23,4 @@ RUN R -e "renv::restore()"
 
 EXPOSE 3838
 
-CMD ["R", "-e", "shiny::runApp('./app.R', host='0.0.0.0', port=3838)"]
+CMD R -e "shiny::runApp('./app.R', host='0.0.0.0', port=as.numeric(Sys.getenv('PORT')))"
